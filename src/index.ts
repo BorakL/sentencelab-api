@@ -1,6 +1,15 @@
-import add from "./nekiFajl.js";
+import express from "express";
+import env from "./config/env.js";
+import connectDB from "./config/db.js";
 
-const x = 3;
-const y = 5;
+const app = express();
+const port = env.PORT;
 
-console.log("add", add(x,y))
+const startServer = async() => {
+    await connectDB();
+    app.listen(port, ()=>{
+        console.log(`Server running on port ${port}`)
+    })
+}
+
+startServer();
