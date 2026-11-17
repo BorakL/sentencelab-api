@@ -1,11 +1,36 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
-import { ADVERBIAL_TYPES, EXPRESSION_TYPES, LEVEL_TYPES, SENTENCE_TYPES, TENSE_TYPES, type IAdverbial, type IMultipleChoice, type ISentenceExpression, type LevelType, type SentenceType, type TenseType } from "../types/index.js";
+import mongoose, { Document, Model, Schema, Types } from "mongoose";
+import {  LEVEL_TYPES, type LevelType} from "../types/index.js";
+import { ADVERBIAL_TYPES, EXPRESSION_TYPES, SENTENCE_TYPES, TENSE_TYPES, type AdverbialType, type ExpressionType, type sentenceType, type TenseType } from "../types/grammarTypes.js";
+
+export interface IAdverbial {
+  text: string;
+  type: AdverbialType;
+}
+
+export interface ISentenceExpression {
+  expressionId: Types.ObjectId;
+  type: ExpressionType;
+  text: string;
+  startIndex: number;
+  endIndex: number;
+}
+
+export interface IMultipleChoice {
+    blank: {
+        word: string,
+        start: number,
+        end: number
+    },
+    options: string[],
+    correctAnswer: string
+}
+
 
 export interface ISentence {
     text: string;
     topic: string;
     level: LevelType;
-    sentenceType: SentenceType;
+    sentenceType: sentenceType;
     primaryTense: TenseType;
     otherTenses: TenseType[];
     hasSubject: boolean;
@@ -135,7 +160,7 @@ const sentenceSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        enum: TENSE_TYPES 
+        enum: TENSE_TYPES
     },
     otherTenses: {
         type: [String],
