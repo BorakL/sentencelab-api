@@ -46,3 +46,9 @@ export const EXPRESSION_TYPES = [
 export type ExpressionType = (typeof EXPRESSION_TYPES)[number];
 
 
+export const SENTENCE_TRANSFORMATION_TYPES = [
+    "word-formation",
+    "sentence-transformation",
+    "keyword-transformation"
+] as const;
+export type SentenceTransformationType = (typeof SENTENCE_TRANSFORMATION_TYPES)[number];

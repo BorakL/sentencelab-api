@@ -1,6 +1,6 @@
 import { model } from "mongoose";
-import type { ICategoryDoc } from "../../models/categoryModel.js";
 import BaseRepository from "../../repositories/baseRepository.js";
+import type { ICategoryDoc } from "../../models/category/categoryTypes.js";
 
 class CategoryRepository extends BaseRepository<ICategoryDoc>{
 
