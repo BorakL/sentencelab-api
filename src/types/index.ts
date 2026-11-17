@@ -49,7 +49,7 @@ export const EXPRESSION_TYPES = [
   "idiom",
   "collocation",
   "useful-expression"
-]
+] as const;
 export type ExpressionType = (typeof EXPRESSION_TYPES)[number];
 
 export interface ISentenceExpression {
@@ -67,7 +67,7 @@ export const LEVEL_TYPES = [
     "B2",
     "C1",
     "C2"
-]
+] as const;
 export type LevelType = (typeof LEVEL_TYPES)[number];
 
 export interface IMultipleChoice {
