@@ -2,6 +2,10 @@ import type { Model, Types } from "mongoose";
 import type { AdverbialType, ExpressionType, sentenceType, TenseType } from "../../types/grammarTypes.js";
 import type { LevelType } from "../../types/sharedTypes.js";
 
+/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
+
+
+/////////////// SUBSHEMAS INTERFACES ///////////////
 export interface IAdverbial {
   text: string;
   type: AdverbialType;
@@ -26,6 +30,8 @@ export interface IMultipleChoice {
 }
 
 
+/////////////// MAIN (SCHEMA) INTERFACE ///////////////
+
 export interface ISentence {
     text: string;
     topic: string;
@@ -46,5 +52,14 @@ export interface ISentence {
     multipleChoice: IMultipleChoice;
 }
 
+
+/////////////// DOCUMENT, MODEL INTERFACES ///////////////
+
 export interface ISentenceDoc extends ISentence, Document{}
 export interface ISentenceModel extends Model<ISentenceDoc>{}
+
+
+/////////////// PARAMS INTERFACES ///////////////
+
+
+/////////////// QUERY INTERFACES ///////////////

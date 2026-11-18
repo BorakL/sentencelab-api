@@ -1,11 +1,17 @@
 import type { Model, Types } from "mongoose";
 
+/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
+
+
+/////////////// SUBSHEMAS INTERFACES ///////////////
 export interface ITopicTranslations {
     title: string,
     summary: string,
     explanation: string
 }
 
+
+/////////////// MAIN (SCHEMA) INTERFACE ///////////////
 export interface ITopic {
     title: string,
     categoryId: Types.ObjectId,
@@ -15,10 +21,18 @@ export interface ITopic {
     translations: Record<string, ITopicTranslations>
 }
 
-export interface ITopicDoc extends ITopic, Document {}
 
+/////////////// DOCUMENT, MODEL INTERFACES ///////////////
+
+export interface ITopicDoc extends ITopic, Document {}
 export interface ITopicModel extends Model<ITopicDoc> {}
+
+
+/////////////// PARAMS INTERFACES ///////////////
 
 export type ITopicParams = Omit<ITopic, "categoryId"> & {
     categoryId: string;
 };
+
+
+/////////////// QUERY INTERFACES ///////////////

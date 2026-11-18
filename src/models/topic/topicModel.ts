@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import type { ITopicDoc, ITopicModel } from "./topicTypes.js";
-import { topicTranslationsSchema } from "./topicSubSchemas.js";
+import { topicTranslationsSchema } from "./topicSubschemas.js";
 
 
 const topicSchema = new mongoose.Schema({

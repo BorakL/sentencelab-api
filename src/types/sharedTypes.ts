@@ -7,3 +7,11 @@ export const LEVEL_TYPES = [
     "C2"
 ] as const;
 export type LevelType = (typeof LEVEL_TYPES)[number];
+
+
+export interface IBaseQuery {
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: "asc" | "desc";
+}

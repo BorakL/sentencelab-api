@@ -1,6 +1,7 @@
 import type { Model, Types } from "mongoose";
 import type { SentenceTransformationType } from "../../types/grammarTypes.js";
 
+/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
 export interface ITransformationRawSentence {
     role: string;
     rawSentence: string;
@@ -17,6 +18,7 @@ export interface ITransformationGenerationResult {
 }
 
 
+/////////////// SUBSHEMAS INTERFACES ///////////////
 export interface IGroupItem {
     role: string;
     sentenceId: Types.ObjectId;
@@ -37,6 +39,8 @@ export interface ISentenceTransformationTranslation {
     keyword?: string
 }
 
+
+/////////////// MAIN (SCHEMA) INTERFACE ///////////////
 export interface ISentenceTransformation {
     title: string;
     type: SentenceTransformationType;
@@ -50,13 +54,20 @@ export interface ISentenceTransformation {
     translations: Record<string, ISentenceTransformationTranslation>;
 }
 
-export interface ISentenceTransformationDoc
-    extends ISentenceTransformation, Document {}
+
+/////////////// DOCUMENT, MODEL INTERFACES ///////////////
+export interface ISentenceTransformationDoc extends ISentenceTransformation, Document {}
 
 export interface ISentenceTransformationModel extends Model<ISentenceTransformationDoc> {}
 
+
+/////////////// PARAMS INTERFACES ///////////////
 export type ISentenceTransformationParams =
     Omit<ISentenceTransformation, "categoryId" | "translations"> & {
         categoryId: string;
         translations?: Record<string, ISentenceTransformationTranslation>;
     };
+
+
+/////////////// QUERY INTERFACES ///////////////
+
