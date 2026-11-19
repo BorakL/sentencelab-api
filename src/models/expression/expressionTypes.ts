@@ -31,10 +31,7 @@ export interface IExpressionModel extends Model<IExpressionDoc> {}
 
 /////////////// PARAMS INTERFACES ///////////////
 
-export type IExpressionParams = Omit<
-  IExpression,
-  "normalizedText" | "translations"
-> & {
+export type IExpressionParams = Omit<IExpression, "normalizedText" | "translations"> & {
   translations?: Record<string, IExpressionTranslation>;
 };
 
