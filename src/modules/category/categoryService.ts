@@ -1,5 +1,5 @@
 import type { QueryFilter } from "mongoose";
-import type { ICategory, ICategoryDoc, ICategoryParams } from "../../models/category/categoryTypes.js";
+import type { ICategory, ICategoryCreateParams, ICategoryUpdateParams } from "../../models/category/categoryTypes.js";
 import type CategoryRepository from "./categoryRepository.js";
 
 class CategoryService {
@@ -9,7 +9,7 @@ class CategoryService {
         this.repository = repository;
     }
     
-    async createCategory(data: ICategoryParams){
+    async createCategory(data: ICategoryCreateParams){
         return await this.repository.createOne(data)
     }
 
@@ -32,7 +32,7 @@ class CategoryService {
         });
     }
 
-    async updateCategory(id:string, data:Partial<ICategoryParams>){
+    async updateCategory(id:string, data:Partial<ICategoryUpdateParams>){
         return await this.repository.updateById(id,data);
     }
 
@@ -42,5 +42,3 @@ class CategoryService {
 }
 
 export default CategoryService;
-
-

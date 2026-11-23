@@ -1,15 +1,26 @@
 import express from "express";
-import env from "./config/env.js";
-import connectDB from "./config/db.js";
+
+import categoryRoutes from "./modules/category/categoryRoutes.js";
 
 const app = express();
-const port = env.PORT;
 
-const startServer = async() => {
-    await connectDB();
-    app.listen(port, ()=>{
-        console.log(`Server running on port ${port}`)
-    })
-}
+// Global middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-startServer();
+// Routes
+app.use("/api/categories", categoryRoutes);
+
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "Route not found"
+    });
+});
+
+// Global error handler
+// Treba da bude poslednji middleware
+// app.use(errorHandler);
+
+export default app;

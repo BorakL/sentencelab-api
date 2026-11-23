@@ -7,9 +7,7 @@ const validatePagination = (req:Request, res:Response, next:NextFunction) => {
     if(
         !Number.isInteger(page) ||
         !Number.isInteger(limit) ||
-        page < 1 ||
-        limit > 1 ||
-        limit > 100
+        page < 1 || limit > 100
     ){
         return next(new ValidationError("Invalid pagination parameters"))
     }

@@ -1,5 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import type CategoryService from "./categoryService.js";
+import CategoryService from "./categoryService.js";
+import CategoryRepository from "./categoryRepository.js";
 
 class CategoryController {
     private service: CategoryService;
@@ -82,4 +83,7 @@ class CategoryController {
     }
 }
 
-export default CategoryController;
+const categoryRepository = new CategoryRepository();
+const categoryService = new CategoryService(categoryRepository);
+
+export default new CategoryController(categoryService);
