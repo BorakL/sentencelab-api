@@ -1,39 +1,48 @@
-import type { Model } from "mongoose";
-import type { ExpressionType } from "../../types/grammarTypes.js";
+
+import type { Model, Document } from "mongoose";
+import type { z } from "zod";
+
+import {
+    expressionTranslationZodSchema,
+    expressionZodSchema,
+    expressionCreateParamsZodSchema,
+    expressionUpdateParamsZodSchema
+} from "./expressionZodShemas.js";
 
 
-/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
+/////////////// GENERATION INTERFACES ///////////////
 
 
-/////////////// SUBSHEMAS INTERFACES ///////////////
-export interface IExpressionTranslation {
-  text: string;
-  type: string;
-  meaning: string;
-}
+/////////////// SUBSCHEMAS INTERFACES ///////////////
+
+export interface IExpressionTranslation extends z.infer<
+    typeof expressionTranslationZodSchema
+> {}
 
 
 /////////////// MAIN (SCHEMA) INTERFACE ///////////////
-export interface IExpression {
-  text: string;
-  normalizedText: string;
-  type: ExpressionType;
-  meaning: string;
-  translations: Map<string, IExpressionTranslation>;
-}
+
+export interface IExpression extends z.infer<
+    typeof expressionZodSchema
+> {}
 
 
 /////////////// DOCUMENT, MODEL INTERFACES ///////////////
 
 export interface IExpressionDoc extends IExpression, Document {}
+
 export interface IExpressionModel extends Model<IExpressionDoc> {}
 
 
 /////////////// PARAMS INTERFACES ///////////////
 
-export type IExpressionParams = Omit<IExpression, "normalizedText" | "translations"> & {
-  translations?: Record<string, IExpressionTranslation>;
-};
+export interface IExpressionCreateParams extends z.infer<
+    typeof expressionCreateParamsZodSchema
+> {}
+
+export interface IExpressionUpdateParams extends z.infer<
+    typeof expressionUpdateParamsZodSchema
+> {}
 
 
 /////////////// QUERY INTERFACES ///////////////

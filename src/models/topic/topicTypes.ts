@@ -1,38 +1,38 @@
-import type { Model, Types } from "mongoose";
 
-/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
+import type { Model, Types, Document } from "mongoose";
+import type { z, infer as ZodInfer } from "zod";
+
+import {
+    topicTranslationsSchema,
+    type topicCreateParamsSchema,
+    type topicUpdateParamsSchema
+} from "./topicZodSchemas.js";
 
 
-/////////////// SUBSHEMAS INTERFACES ///////////////
-export interface ITopicTranslations {
-    title: string,
-    summary: string,
-    explanation: string
-}
+/////////////// SUBSCHEMAS TYPES ///////////////
 
+export interface ITopicTranslations extends z.infer<typeof topicTranslationsSchema> {};
 
 /////////////// MAIN (SCHEMA) INTERFACE ///////////////
+
 export interface ITopic {
-    title: string,
-    categoryId: Types.ObjectId,
-    summary: string,
-    explanation: string,
-    generationPrompt: string,
-    translations: Record<string, ITopicTranslations>
+    title: string;
+    categoryId: Types.ObjectId;
+    summary: string;
+    explanation: string;
+    generationPrompt: string;
+    translations: Record<string, ITopicTranslations>;
 }
 
 
 /////////////// DOCUMENT, MODEL INTERFACES ///////////////
 
 export interface ITopicDoc extends ITopic, Document {}
+
 export interface ITopicModel extends Model<ITopicDoc> {}
 
 
-/////////////// PARAMS INTERFACES ///////////////
+/////////////// PARAMS TYPES ///////////////
 
-export type ITopicParams = Omit<ITopic, "categoryId"> & {
-    categoryId: string;
-};
-
-
-/////////////// QUERY INTERFACES ///////////////
+export interface TopicCreateParams extends z.infer<typeof topicTranslationsSchema> {};
+export interface TopicUpdateParams extends z.infer<typeof topicUpdateParamsSchema> {};

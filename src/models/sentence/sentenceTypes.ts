@@ -1,65 +1,52 @@
-import type { Model, Types } from "mongoose";
-import type { AdverbialType, ExpressionType, sentenceType, TenseType } from "../../types/grammarTypes.js";
-import type { LevelType } from "../../types/sharedTypes.js";
+import type { Model, Document } from "mongoose";
+import type { Types } from "mongoose";
+import type { z } from "zod";
 
-/////////////// GENERATION INTERFACES (Interfaces that will be used at AI generation time) ///////////////
+import {
+    adverbialZodSchema,
+    sentenceExpressionZodSchema,
+    multipleChoiceZodSchema,
+    sentenceZodSchema,
+    sentenceCreateParamsZodSchema,
+    sentenceUpdateParamsZodSchema
+} from "./sentenceZodShemas.js";
+import type { ExpressionType } from "../../types/grammarTypes.js";
 
+// GENERATION INTERFACES
 
-/////////////// SUBSHEMAS INTERFACES ///////////////
-export interface IAdverbial {
-  text: string;
-  type: AdverbialType;
-}
+// SUBSCHEMAS
+export interface IAdverbial extends z.infer<
+    typeof adverbialZodSchema
+> {}
 
 export interface ISentenceExpression {
-  expressionId: Types.ObjectId;
-  type: ExpressionType;
-  text: string;
-  startIndex: number;
-  endIndex: number;
-}
-
-export interface IMultipleChoice {
-    blank: {
-        word: string,
-        start: number,
-        end: number
-    },
-    options: string[],
-    correctAnswer: string
-}
-
-
-/////////////// MAIN (SCHEMA) INTERFACE ///////////////
-
-export interface ISentence {
+    expressionId: Types.ObjectId;
+    type: ExpressionType;
     text: string;
-    topic: string;
-    level: LevelType;
-    sentenceType: sentenceType;
-    primaryTense: TenseType;
-    otherTenses: TenseType[];
-    hasSubject: boolean;
-    hasPassive: boolean;
-    hasModal: boolean;
-    hasNegation: boolean;
-    hasQuestion: boolean;
-    hasConditional: boolean;
-    hasRelativeClause: boolean;
-    hasPhrasalVerb: boolean;
-    adverbials: IAdverbial[];
-    expressions: ISentenceExpression[];
-    multipleChoice: IMultipleChoice;
+    startIndex: number;
+    endIndex: number;
 }
 
+export interface IMultipleChoice extends z.infer<
+    typeof multipleChoiceZodSchema
+> {}
 
-/////////////// DOCUMENT, MODEL INTERFACES ///////////////
+// MAIN
+export interface ISentence extends z.infer<
+    typeof sentenceZodSchema
+> {}
 
-export interface ISentenceDoc extends ISentence, Document{}
-export interface ISentenceModel extends Model<ISentenceDoc>{}
+// DOCUMENT, MODEL
+export interface ISentenceDoc extends ISentence, Document {}
+export interface ISentenceModel extends Model<ISentenceDoc> {}
 
+// PARAMS
+export interface ISentenceCreateParams extends z.infer<
+    typeof sentenceCreateParamsZodSchema
+> {}
 
-/////////////// PARAMS INTERFACES ///////////////
+export interface ISentenceUpdateParams extends z.infer<
+    typeof sentenceUpdateParamsZodSchema
+> {}
 
-
-/////////////// QUERY INTERFACES ///////////////
+// QUERY

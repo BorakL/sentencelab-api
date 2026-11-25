@@ -1,6 +1,7 @@
 import express from "express";
 
 import categoryRoutes from "./modules/category/categoryRoutes.js";
+import expressionRoutes from "./modules/expression/expressionRoutes.js";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/categories", categoryRoutes);
+app.use("/api/expressions", expressionRoutes);
 
 // 404 handler
 app.use((req, res) => {
