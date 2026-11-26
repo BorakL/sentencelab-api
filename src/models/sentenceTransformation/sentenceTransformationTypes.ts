@@ -23,8 +23,12 @@ export interface ISentenceTransformationTranslation extends z.infer<typeof sente
 
 
 /////////////// MAIN (SCHEMA) INTERFACE ///////////////
-export interface ISentenceTransformation extends z.infer<typeof sentenceTransformationSchema> {}
-
+export interface ISentenceTransformation extends Omit< 
+    z.infer<typeof sentenceTransformationSchema>,
+    "categoryId" 
+> {
+    categoryId: Types.ObjectId
+}
 
 /////////////// DOCUMENT, MODEL INTERFACES ///////////////
 export interface ISentenceTransformationDoc extends ISentenceTransformation, Document {}
@@ -32,8 +36,8 @@ export interface ISentenceTransformationModel extends Model<ISentenceTransformat
 
 
 /////////////// PARAMS INTERFACES ///////////////
-export type SentenceTransformationCreateParams = z.infer<typeof sentenceTransformationCreateParamsSchema>;
-export type SentenceTransformationUpdateParams = z.infer<typeof sentenceTransformationUpdateParamsSchema>;
+export type ISentenceTransformationCreateParams = z.infer<typeof sentenceTransformationCreateParamsSchema>;
+export type ISentenceTransformationUpdateParams = z.infer<typeof sentenceTransformationUpdateParamsSchema>;
 
 
 /////////////// QUERY INTERFACES ///////////////

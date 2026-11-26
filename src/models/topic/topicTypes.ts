@@ -34,5 +34,5 @@ export interface ITopicModel extends Model<ITopicDoc> {}
 
 /////////////// PARAMS TYPES ///////////////
 
-export interface TopicCreateParams extends z.infer<typeof topicTranslationsSchema> {};
-export interface TopicUpdateParams extends z.infer<typeof topicUpdateParamsSchema> {};
+export interface ITopicCreateParams extends z.infer<typeof topicTranslationsSchema> {};
+export interface ITopicUpdateParams extends z.infer<typeof topicUpdateParamsSchema> {};
